@@ -2,6 +2,7 @@ package com.idegroup.funfacts;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,6 +30,26 @@ public class FunFactsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fun_facts);
+        setContentView(R.layout.activity_fun_facts);/*<- R here means generated class by Android called Resources!!
+        it's located: /home/idegroup/IdeProject/FunFacts/app/build/generated/source/r/debug/com/idegroup/funfacts/R.java*/
+
+        /*Assign the views from the Layout File to corresponding variable:
+        * NOTE: assign views only after the setContentView!!!
+        *
+        * */
+
+        factTextView = findViewById(R.id.factTextView);/*<- this R can find the int id which requested by findViewByID*/
+        showFactButton = findViewById(R.id.showFactButton);/*<- pelase remember we set the id of our button as this!*/
+
+        /*Now we will make our button do something:*/
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /* The button was clicked thus update the TextView with a new fact!*/
+                String fact = "Ostriches can run faster than horses";
+                factTextView.setText(fact);/*<- update the factTextView in xml with new fact above!*/
+            }
+        };
+        showFactButton.setOnClickListener(listener);
     }
 }

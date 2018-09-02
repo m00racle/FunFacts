@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Random;
+
 /*
 * In Android Activity represent the screen that user can interact with
 * */
@@ -46,7 +48,17 @@ public class FunFactsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /* The button was clicked thus update the TextView with a new fact!*/
-                String fact = "Ostriches can run faster than horses";
+
+                /*We need to set randomness using random number generator:*/
+
+                Random randomGenerator = new Random();/*<- this is the random number generator*/
+
+                int randomNumber = randomGenerator.nextInt(3);/*<- store random generated int between 0 <=int< 3*/
+
+                String fact = randomNumber + "";/*<- we start the random fact by set this variable to empty string!
+                then we add the newly generated random integer to the string since it was concatenated with string
+                this is just for testing purposes only! to check if the number properly generated*/
+
                 factTextView.setText(fact);/*<- update the factTextView in xml with new fact above!*/
             }
         };

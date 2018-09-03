@@ -1,12 +1,12 @@
 package com.idegroup.funfacts;
 
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.Random;
 
 /*
 * In Android Activity represent the screen that user can interact with
@@ -18,6 +18,19 @@ public class FunFactsActivity extends AppCompatActivity {
     * this session it omit that means it follows the general programming format..*/
     private TextView factTextView;
     private Button showFactButton;
+
+    /*in order to change the background color dynamically we need to define the background of the activity:*/
+
+    private RelativeLayout relativeLayout;/*<- this is where the background of this activity is defined*/
+
+    /*insert newly random fact by instantiating FactBook object to this activity:*/
+
+    private FactBook factBook = new FactBook();/*<- this is the best place to instatiate FactBook object!
+    NOTE: FactBook() means we use default constructor*/
+
+    /*instantiate colorWheel object to gain randomly selected color code:*/
+
+    private ColorWheel colorWheel = new ColorWheel();
 
     /*
         The on create method is called when our activity first time created
@@ -35,6 +48,8 @@ public class FunFactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fun_facts);/*<- R here means generated class by Android called Resources!!
         it's located: /home/idegroup/IdeProject/FunFacts/app/build/generated/source/r/debug/com/idegroup/funfacts/R.java*/
 
+
+
         /*Assign the views from the Layout File to corresponding variable:
         * NOTE: assign views only after the setContentView!!!
         *
@@ -43,37 +58,26 @@ public class FunFactsActivity extends AppCompatActivity {
         factTextView = findViewById(R.id.factTextView);/*<- this R can find the int id which requested by findViewByID*/
         showFactButton = findViewById(R.id.showFactButton);/*<- pelase remember we set the id of our button as this!*/
 
+        relativeLayout = findViewById(R.id.factRelativeLayout);/*<- refer to factActivityPage for activity group view*/
+
         /*Now we will make our button do something:*/
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Adding all available facts:*/
-                String[] facts = {
-                        "Ants stretch when they wake up in the morning.",
-                        "Ostriches can run faster than horses.",
-                        "Olympic gold medals are actually made mostly of silver.",
-                        "You are born with 300 bones; by the time you are an adult you will have 206.",
-                        "It takes about 8 minutes for light from the Sun to reach Earth.",
-                        "Some bamboo plants can grow almost a meter in just one day.",
-                        "The state of Florida is bigger than England.",
-                        "Some penguins can leap 2-3 meters out of the water.",
-                        "On average, it takes 66 days to form a new habit.",
-                        "Mammoths still walked the earth when the Great Pyramid was being built.",
-                        "Treehouse is not actually in a tree."};
 
-                /* The button was clicked thus update the TextView with a new fact!*/
+                factTextView.setText(factBook.getFact());/*<- getFact from the factBook object to be shown*/
 
-                /*We need to set randomness using random number generator:*/
+                /*Now changing to new color when we press the button:*/
 
-                Random randomGenerator = new Random();/*<- this is the random number generator*/
+                int backgroundColor = colorWheel.getColor();
+                relativeLayout.setBackgroundColor(backgroundColor);/*<- read the Documentation*/
 
-                int randomNumber = randomGenerator.nextInt(facts.length);/*<- store random generated int in respect
-                dynamically with the length of the facts array!*/
+                /*Set the text color in the button the same as the background:*/
 
-                String fact = facts[randomNumber];/*<- we set the fact to be displayed by addressing the index in facts*/
+                showFactButton.setTextColor(backgroundColor);
 
-
-                factTextView.setText(fact);/*<- update the factTextView in xml with new fact above!*/
+                /*NOTE: this is not done yet we also need to modify the xml file to ensure the started button also has
+                * the same background color of the start up page which is a green*/
             }
         };
         showFactButton.setOnClickListener(listener);

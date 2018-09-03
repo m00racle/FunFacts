@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/factRelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#51b46d"
     android:padding="50dp"
-    tools:context="com.idegroup.funfacts.FunFactsActivity">
+    tools:context="com.idegroup.funfacts.FunFactsActivity"> <!-- this id is added to refer to the whole Relative Layout of the activity -->
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,7 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:text="Ants stretch when they wake up in the morning"
+        android:text="Press Button to Start!"
         android:textColor="@android:color/white"
         android:textSize="24sp" />
 
@@ -32,7 +33,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
         android:text="Show Another Fun Fact"
-        android:background="@android:color/white" />
+        android:textColor="#51b46d" />
 
 </RelativeLayout>

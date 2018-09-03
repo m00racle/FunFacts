@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#51b46d"
     android:padding="50dp"
-    tools:context="com.idegroup.funfacts.FunFactsActivity">
+    tools:context="com.idegroup.funfacts.FunFactsActivity"
+    android:id="@+id/factRelativeLayout"> <!-- this id is added to refer to the whole Relative Layout of the activity -->
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Show Another Fun Fact"
-        android:background="@android:color/white" />
+        android:background="@android:color/white"
+        android:text="Show Another Fun Fact" />
 
 </RelativeLayout>

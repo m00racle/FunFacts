@@ -1,8 +1,8 @@
 package com.idegroup.funfacts;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -27,6 +27,10 @@ public class FunFactsActivity extends AppCompatActivity {
 
     private FactBook factBook = new FactBook();/*<- this is the best place to instatiate FactBook object!
     NOTE: FactBook() means we use default constructor*/
+
+    /*instantiate colorWheel object to gain randomly selected color code:*/
+
+    private ColorWheel colorWheel = new ColorWheel();
 
     /*
         The on create method is called when our activity first time created
@@ -65,7 +69,15 @@ public class FunFactsActivity extends AppCompatActivity {
 
                 /*Now changing to new color when we press the button:*/
 
-                relativeLayout.setBackgroundColor(Color.RED);/*<- more of the usage of Color class in the Documentation*/
+                int backgroundColor = colorWheel.getColor();
+                relativeLayout.setBackgroundColor(backgroundColor);/*<- read the Documentation*/
+
+                /*Set the text color in the button the same as the background:*/
+
+                showFactButton.setTextColor(backgroundColor);
+
+                /*NOTE: this is not done yet we also need to modify the xml file to ensure the started button also has
+                * the same background color of the start up page which is a green*/
             }
         };
         showFactButton.setOnClickListener(listener);

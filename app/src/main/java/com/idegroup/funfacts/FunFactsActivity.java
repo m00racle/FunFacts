@@ -3,15 +3,23 @@ package com.idegroup.funfacts;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /*
 * In Android Activity represent the screen that user can interact with
 * */
 public class FunFactsActivity extends AppCompatActivity {
+
+    /*Adding TAG to make it easier to log any information from this class:*/
+
+    public static final String TAG = FunFactsActivity.class.getSimpleName();/*<- static always availabe but final cannot
+     be changed!
+     NOTE: we using class get simple name to get just the name but no package name inserted*/
 
     /* Declare our View variables:
     * Prior to this course I always think that all field in Android should start with m such as mFactTextView but in
@@ -81,5 +89,18 @@ public class FunFactsActivity extends AppCompatActivity {
             }
         };
         showFactButton.setOnClickListener(listener);
+
+        /*Let's make new toast: NOTE : this only works inside the onCreate method when I try to put it inside the
+        * activity class but outside of any method it does not work! Read more on Toast Android Developer Doc*/
+
+        //Toast.makeText(this, "Yay!", Toast.LENGTH_SHORT).show();/*<- this keyword refer to current object*/
+
+        /*logging the activity:*/
+
+        Log.d(TAG, "We're logging from the onCreate method");/*<- tag is our means to identify
+        where this logging process take place. Although we are free to give any name but it is a good practice to
+        specify the class where this logging is take place in order to sort it out in the future. This is done using
+        the static final TAG constant defined after the class declaration!*/
     }
+
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /*
 * In Android Activity represent the screen that user can interact with
@@ -81,5 +82,11 @@ public class FunFactsActivity extends AppCompatActivity {
             }
         };
         showFactButton.setOnClickListener(listener);
+
+        /*Let's make new toast: NOTE : this only works inside the onCreate method when I try to put it inside the
+        * activity class but outside of any method it does not work! Read more on Toast Android Developer Doc*/
+
+        Toast.makeText(this, "Yay!", Toast.LENGTH_SHORT).show();/*<- this keyword refer to current object*/
     }
+
 }

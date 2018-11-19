@@ -1,6 +1,5 @@
 package com.idegroup.funfacts;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /*
 * In Android Activity represent the screen that user can interact with
@@ -20,6 +18,8 @@ public class FunFactsActivity extends AppCompatActivity {
     public static final String TAG = FunFactsActivity.class.getSimpleName();/*<- static always availabe but final cannot
      be changed!
      NOTE: we using class get simple name to get just the name but no package name inserted*/
+    private static final String KEY_FACT = "KEY_FACT";
+    private static final String KEY_COLOR = "KEY_COLOR";
 
     /* Declare our View variables:
     * Prior to this course I always think that all field in Android should start with m such as mFactTextView but in
@@ -31,7 +31,7 @@ public class FunFactsActivity extends AppCompatActivity {
 
     private RelativeLayout relativeLayout;/*<- this is where the background of this activity is defined*/
 
-    /*insert newly random fact by instantiating FactBook object to this activity:*/
+    /*insert newly random mFact by instantiating FactBook object to this activity:*/
 
     private FactBook factBook = new FactBook();/*<- this is the best place to instatiate FactBook object!
     NOTE: FactBook() means we use default constructor*/
@@ -39,6 +39,8 @@ public class FunFactsActivity extends AppCompatActivity {
     /*instantiate colorWheel object to gain randomly selected color code:*/
 
     private ColorWheel colorWheel = new ColorWheel();
+    private String mFact;
+    private int mColor;
 
     /*
         The on create method is called when our activity first time created
@@ -50,6 +52,14 @@ public class FunFactsActivity extends AppCompatActivity {
     * layout file is use for the screen. The R.layout.activity_fun_facts parameter is an id which points to the activity
     * _fun_facts XML file in the layout directory which we modified earlier.
     * */
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_FACT, mFact);
+        outState.putInt(KEY_COLOR, mColor);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,16 +83,18 @@ public class FunFactsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                factTextView.setText(factBook.getFact());/*<- getFact from the factBook object to be shown*/
+                mFact = factBook.getFact();
+
+                factTextView.setText(mFact);/*<- getFact from the factBook object to be shown*/
 
                 /*Now changing to new color when we press the button:*/
 
-                int backgroundColor = colorWheel.getColor();
-                relativeLayout.setBackgroundColor(backgroundColor);/*<- read the Documentation*/
+                int mColor = colorWheel.getColor();
+                relativeLayout.setBackgroundColor(mColor);/*<- read the Documentation*/
 
                 /*Set the text color in the button the same as the background:*/
 
-                showFactButton.setTextColor(backgroundColor);
+                showFactButton.setTextColor(mColor);
 
                 /*NOTE: this is not done yet we also need to modify the xml file to ensure the started button also has
                 * the same background color of the start up page which is a green*/

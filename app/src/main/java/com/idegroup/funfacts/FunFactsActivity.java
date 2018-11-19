@@ -1,5 +1,6 @@
 package com.idegroup.funfacts;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,7 +16,7 @@ public class FunFactsActivity extends AppCompatActivity {
 
     /*Adding TAG to make it easier to log any information from this class:*/
 
-    public static final String TAG = FunFactsActivity.class.getSimpleName();/*<- static always availabe but final cannot
+    private static final String TAG = FunFactsActivity.class.getSimpleName();/*<- static always availabe but final cannot
      be changed!
      NOTE: we using class get simple name to get just the name but no package name inserted*/
     private static final String KEY_FACT = "KEY_FACT";
@@ -40,7 +41,7 @@ public class FunFactsActivity extends AppCompatActivity {
 
     private ColorWheel colorWheel = new ColorWheel();
     private String mFact;
-    private int mColor;
+    private int mColor = Color.parseColor(colorWheel.colors[8]);
 
     /*
         The on create method is called when our activity first time created
@@ -53,12 +54,7 @@ public class FunFactsActivity extends AppCompatActivity {
     * _fun_facts XML file in the layout directory which we modified earlier.
     * */
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(KEY_FACT, mFact);
-        outState.putInt(KEY_COLOR, mColor);
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +62,9 @@ public class FunFactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fun_facts);/*<- R here means generated class by Android called Resources!!
         it's located: /home/idegroup/IdeProject/FunFacts/app/build/generated/source/r/debug/com/idegroup/funfacts/R.java*/
 
-
+        mFact = getString(R.string.press_button_to_start);/*I need to declare in here since I am using string
+                                                            resource from the R.layout.activity_fun_facts that
+                                                            declared here*/
 
         /*Assign the views from the Layout File to corresponding variable:
         * NOTE: assign views only after the setContentView!!!
@@ -89,7 +87,7 @@ public class FunFactsActivity extends AppCompatActivity {
 
                 /*Now changing to new color when we press the button:*/
 
-                int mColor = colorWheel.getColor();
+                mColor = colorWheel.getColor();
                 relativeLayout.setBackgroundColor(mColor);/*<- read the Documentation*/
 
                 /*Set the text color in the button the same as the background:*/
@@ -113,6 +111,22 @@ public class FunFactsActivity extends AppCompatActivity {
         where this logging process take place. Although we are free to give any name but it is a good practice to
         specify the class where this logging is take place in order to sort it out in the future. This is done using
         the static final TAG constant defined after the class declaration!*/
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mFact = savedInstanceState.getString(KEY_FACT);
+        mColor = savedInstanceState.getInt(KEY_COLOR);
+        factTextView.setText(mFact);
+        relativeLayout.setBackgroundColor(mColor);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_FACT, mFact);
+        outState.putInt(KEY_COLOR, mColor);
     }
 
 }

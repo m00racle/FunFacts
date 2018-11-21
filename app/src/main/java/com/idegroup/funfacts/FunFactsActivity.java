@@ -16,7 +16,7 @@ public class FunFactsActivity extends AppCompatActivity {
 
     /*Adding TAG to make it easier to log any information from this class:*/
 
-    private static final String TAG = FunFactsActivity.class.getSimpleName();/*<- static always availabe but final cannot
+    private static final String TAG = FunFactsActivity.class.getSimpleName();/*<- static always available but final cannot
      be changed!
      NOTE: we using class get simple name to get just the name but no package name inserted*/
     private static final String KEY_FACT = "KEY_FACT";
@@ -34,7 +34,7 @@ public class FunFactsActivity extends AppCompatActivity {
 
     /*insert newly random mFact by instantiating FactBook object to this activity:*/
 
-    private FactBook factBook = new FactBook();/*<- this is the best place to instatiate FactBook object!
+    private FactBook factBook = new FactBook();/*<- this is the best place to instantiate FactBook object!
     NOTE: FactBook() means we use default constructor*/
 
     /*instantiate colorWheel object to gain randomly selected color code:*/
@@ -60,7 +60,7 @@ public class FunFactsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fun_facts);/*<- R here means generated class by Android called Resources!!
-        it's located: /home/idegroup/IdeProject/FunFacts/app/build/generated/source/r/debug/com/idegroup/funfacts/R.java*/
+        it's located: /home/ideGroup/IdeProject/FunFacts/app/build/generated/source/r/debug/com/ideGroup/funFacts/R.java*/
 
         mFact = getString(R.string.press_button_to_start);/*I need to declare in here since I am using string
                                                             resource from the R.layout.activity_fun_facts that
@@ -72,7 +72,7 @@ public class FunFactsActivity extends AppCompatActivity {
         * */
 
         factTextView = findViewById(R.id.factTextView);/*<- this R can find the int id which requested by findViewByID*/
-        showFactButton = findViewById(R.id.showFactButton);/*<- pelase remember we set the id of our button as this!*/
+        showFactButton = findViewById(R.id.showFactButton);/*<- please remember we set the id of our button as this!*/
 
         relativeLayout = findViewById(R.id.factRelativeLayout);/*<- refer to factActivityPage for activity group view*/
 
